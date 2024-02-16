@@ -1,10 +1,6 @@
 import discord
-from discord.ext import commands
-from discord import FFmpegPCMAudio
 import json
 import yt_dlp
-import nacl
-import asyncio
 from collections import deque
 import ai_chat
 from database import MusicDatabase
