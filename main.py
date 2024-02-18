@@ -6,6 +6,7 @@ import yt_dlp
 from collections import deque
 import ai_chat
 from database import MusicDatabase
+from discord.ext.commands import DefaultHelpCommand
 import datetime
 from discord.ext import commands
 
@@ -14,6 +15,8 @@ with open("util/config.json", "r") as token_file:
     token_data = json.load(token_file)
     TOKEN = token_data["token"]
     OPENAI_TOKEN = token_data["openai_token"]
+    SPOTIFY_CLIENT_ID = token_data["spotify_client_id"]
+    SPOTIFY_CLIENT_SECRET = token_data["spotify_client_secret"]
 
 YDL_OPTS = {
     'verbose': True,
@@ -39,7 +42,7 @@ async def main():
     intents = discord.Intents.default()
     intents.message_content = True
 
-    bot = commands.Bot(command_prefix='$', intents=intents, help_command=None)
+    bot = commands.Bot(command_prefix='$', intents=intents, help_command=DefaultHelpCommand())
 
     await bot.load_extension('cogs.ping')
     await bot.load_extension('cogs.music')
